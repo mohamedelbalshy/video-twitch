@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+  
+
+  db:
+    image: mysql:8.0
+    container_name: video-twitch-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: video-twitch
+      MYSQL_ROOT_PASSWORD: video-twitch
+      MYSQL_PASSWORD: video-twitch
+      MYSQL_USER: video-twitch
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - video-twtich-data-volume:/var/lib/mysql
+    networks:
+      - video-twitch
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - 9443:9443
+    volumes:
+        - data:/data
+        - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+ 
+
+networks:
+  video-twitch:
+    driver: bridge
+volumes:
+  video-twtich-data-volume:
+  data:
