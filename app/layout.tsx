@@ -22,7 +22,8 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
         <body className={inter.className}>
-          <ThemeProvider attribute="class"
+          <ThemeProvider 
+            attribute="class"
             forcedTheme="dark"
             storageKey="gamehub-theme"
           >
